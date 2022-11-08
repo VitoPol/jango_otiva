@@ -2,6 +2,7 @@ import csv
 import json
 from ads import models
 
+
 def csv_to_json(csvfilepath, jsonfilepath):
     """
     This is our display of wit and cunning
@@ -24,9 +25,6 @@ def csv_to_json(csvfilepath, jsonfilepath):
         jsonf.write(jsonstring)
 
 
-
-
 if __name__ == '__main__':
     csv_to_json('../datasets/ads.csv', '../datasets/ads.json')
     csv_to_json('../datasets/categories.csv', '../datasets/categories.json')
-

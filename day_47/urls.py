@@ -21,5 +21,8 @@ from ads import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index),
-    path('categories/', views.add_data_to_db)
+    path('categories/', views.CategoriesView.as_view()),
+    path('categories/<int:pk>/', views.CategoryDetailView.as_view()),
+    path('ads/', views.AdsView.as_view()),
+    path('ads/<int:pk>/', views.AdDetailView.as_view()),
 ]
