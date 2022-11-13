@@ -1,6 +1,5 @@
 import csv
 import json
-from ads import models
 
 
 def csv_to_json(csvfilepath, jsonfilepath):
@@ -26,5 +25,7 @@ def csv_to_json(csvfilepath, jsonfilepath):
 
 
 if __name__ == '__main__':
-    csv_to_json('../datasets/ads.csv', '../datasets/ads.json')
-    csv_to_json('../datasets/categories.csv', '../datasets/categories.json')
+    csv_to_json('../datasets/ad.csv', '../datasets/ads.json')
+    csv_to_json('../datasets/category.csv', '../datasets/categories.json')
+    csv_to_json('../datasets/location.csv', '../datasets/locations.json')
+    csv_to_json('../datasets/user.csv', '../datasets/users.json')
