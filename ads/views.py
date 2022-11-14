@@ -34,10 +34,10 @@ def fill_location_db(request):
     with open('./datasets/locations.json', 'r') as f:
         data = json.load(f)
     for dt in data:
-        Categories(name=dt['name'],
-                   lat=dt['lat'],
-                   lng=dt['lng']
-                   ).save()
+        Locations(name=dt["name"],
+                  lat=dt["lat"],
+                  lng=dt["lng"]
+                  ).save()
     return JsonResponse({'result': 'Success fill categories'}, status=200)
 
 
@@ -83,7 +83,7 @@ class CategoriesListView(ListView):
     model = Categories
 
     def get(self, request, *args, **kwargs):
-        categories = Categories.objects.all()
+        categories = Categories.objects.all().order_by("name")
         response = []
         for category in categories:
             response.append({
@@ -151,10 +151,10 @@ class AdsListView(ListView):
     model = Ads
 
     def get(self, request, *args, **kwargs):
-        queryset = Ads.objects.select_related("author", "category").all()
+        queryset = Ads.objects.select_related("author", "category").all().order_by("-price")
 
         paginator = Paginator(queryset, settings.TOTAL_ON_PAGE)
-        page_num = request.GET.get("page")
+        page_num = int(request.GET.get("page", 1))
         page_obj = paginator.get_page(page_num)
 
         ads = []
@@ -171,7 +171,7 @@ class AdsListView(ListView):
             })
         response = {
             "items": ads,
-            "page": int(page_num),
+            "page": page_num,
             "num_pages": paginator.num_pages,
             "total": paginator.count
         }
