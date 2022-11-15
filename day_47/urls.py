@@ -17,11 +17,17 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
+from rest_framework import routers
 
 from ads import views
+from users import views as v
+
+router = routers.SimpleRouter()
+router.register('locations', v.LocationsViewSet)
 
 urlpatterns = [
     # path('', views.index),
+    path('api-auth/', include('rest_framework.urls')),
     path('admin/', admin.site.urls),
     path('ads/', include("ads.urls")),
     path('users/', include("users.urls")),
@@ -31,6 +37,8 @@ urlpatterns = [
     path('fill_locations/', views.fill_location_db),
     path('fill_ads/', views.fill_ads_db)
 ]
+
+urlpatterns += router.urls
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

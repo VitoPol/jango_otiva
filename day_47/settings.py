@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_extensions',
+    'rest_framework',
     # 'ads.apps.AdsConfig',
     'ads',
     'users'
@@ -82,7 +83,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'HOST': os.environ.get("DB_HOST", "localhost"),
-        'NAME': os.environ.get("POSTGRES_NAME", "Otiva_db"),
+        'NAME': os.environ.get("POSTGRES_NAME", "otiva_db"),
         'PORT': os.environ.get("DB_PORT", "5432"),
         'USER': os.environ.get("DB_USER", "postgres"),
         'PASSWORD': os.environ.get("DB_PASSWORD", "postgres"),
@@ -134,3 +135,8 @@ MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 TOTAL_ON_PAGE = 10
+
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10
+}

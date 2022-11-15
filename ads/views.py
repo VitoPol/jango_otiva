@@ -152,6 +152,19 @@ class AdsListView(ListView):
 
     def get(self, request, *args, **kwargs):
         queryset = Ads.objects.select_related("author", "category").all().order_by("-price")
+        category_search = request.GET.get('cat', None)
+        if category_search:
+            queryset = queryset.filter(category__id__icontains=category_search)
+        ads_search = request.GET.get('text', None)
+        if ads_search:
+            queryset = queryset.filter(name__icontains=ads_search)
+        place_search = request.GET.get('location', None)
+        if place_search:
+            queryset = queryset.filter(author__location__name__icontains=place_search)
+        price_from, price_to = request.GET.get('price_from', None), request.GET.get('price_to', None)
+        if price_from and price_to:
+            queryset = queryset.filter(price__range=(price_from, price_to))
+
 
         paginator = Paginator(queryset, settings.TOTAL_ON_PAGE)
         page_num = int(request.GET.get("page", 1))
