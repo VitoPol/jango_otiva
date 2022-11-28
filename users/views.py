@@ -1,17 +1,7 @@
-import json
-
-from django.conf import settings
-from django.core.paginator import Paginator
 from django.db.models import Count, Q
-from django.http import JsonResponse
-from django.shortcuts import render, get_object_or_404
-from django.utils.decorators import method_decorator
-from django.views.decorators.csrf import csrf_exempt
-from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView
 from rest_framework.generics import CreateAPIView, ListAPIView, RetrieveAPIView, UpdateAPIView, DestroyAPIView
-from rest_framework.viewsets import ViewSet, ModelViewSet
+from rest_framework.viewsets import ModelViewSet
 
-from ads.models import Ads
 from users.models import Users, Locations
 from users.serializers import UsersCreateSerializer, LocationsViewSerializer, UsersSerializer
 

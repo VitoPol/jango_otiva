@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_extensions',
     'rest_framework',
+    'rest_framework_simplejwt',
     # 'ads.apps.AdsConfig',
     'ads',
     'users'
@@ -83,7 +84,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'HOST': os.environ.get("DB_HOST", "localhost"),
-        'NAME': os.environ.get("POSTGRES_NAME", "otiva_db"),
+        'NAME': os.environ.get("POSTGRES_NAME", "Otiva_db"),
         'PORT': os.environ.get("DB_PORT", "5432"),
         'USER': os.environ.get("DB_USER", "postgres"),
         'PASSWORD': os.environ.get("DB_PASSWORD", "postgres"),
@@ -138,5 +139,8 @@ TOTAL_ON_PAGE = 10
 
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 10
+    'PAGE_SIZE': 10,
+    'DEFAULT_AUTHENTICATION_CLASSES': ['rest_framework_simplejwt.authentication.JWTAuthentication']
 }
+
+AUTH_USER_MODEL = 'users.Users'

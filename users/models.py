@@ -1,3 +1,4 @@
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 
@@ -14,15 +15,17 @@ class Locations(models.Model):
         verbose_name_plural = "Локации"
 
 
-class Users(models.Model):
-    first_name = models.CharField(max_length=30)
-    last_name = models.CharField(max_length=40)
-    username = models.CharField(max_length=40)
-    password = models.CharField(max_length=40)
-    role = models.CharField(max_length=40)
-    age = models.IntegerField()
-    location = models.ManyToManyField(Locations)
+class Users(AbstractUser):
+    moderator = 'moderator'
+    admin = 'admin'
+    user = 'user'
+    unknown = 'unknown'
 
+    roles = [(moderator, moderator), (admin, admin), (user, user), (unknown, unknown)]
+
+    role = models.CharField(max_length=40, null=True, choices=roles, default=unknown)
+    age = models.IntegerField(null=True)
+    location = models.ManyToManyField(Locations)
     def __str__(self):
         return self.username
 
