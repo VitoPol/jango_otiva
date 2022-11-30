@@ -22,12 +22,14 @@ from users.models import Locations, Users
 
 @csrf_exempt
 def index(request):
-    return JsonResponse({'test': 'test'}, status=200)
+    return JsonResponse({'text': 'Otiva REST API on Django REST framework'}, status=200)
 
 
 @csrf_exempt
 def fill_categories_db(request):
-    """Great kostbIl' """
+    """
+    Заполнение таблицы БД данными из json файла
+    """
     with open('./datasets/categories.json', 'r') as f:
         data = json.load(f)
     for dt in data:
@@ -37,7 +39,9 @@ def fill_categories_db(request):
 
 @csrf_exempt
 def fill_location_db(request):
-    """Great kostbIl' """
+    """
+    Заполнение таблицы БД данными из json файла
+    """
     with open('./datasets/locations.json', 'r') as f:
         data = json.load(f)
     for dt in data:
@@ -50,7 +54,9 @@ def fill_location_db(request):
 
 @csrf_exempt
 def fill_users_db(request):
-    """Great kostbIl' """
+    """
+    Заполнение таблицы БД данными из json файла
+    """
     with open('./datasets/users.json', 'r') as f:
         data = json.load(f)
     for dt in data:
@@ -69,7 +75,9 @@ def fill_users_db(request):
 
 @csrf_exempt
 def fill_ads_db(request):
-    """Great kostbIl' """
+    """
+    Заполнение таблицы БД данными из json файла
+    """
     with open('./datasets/ads.json', 'r') as f:
         data = json.load(f)
     for dt in data:
