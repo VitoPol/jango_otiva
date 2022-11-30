@@ -18,7 +18,6 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
-from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 from ads import views
 from users import views as v
@@ -27,14 +26,11 @@ router = routers.SimpleRouter()
 router.register('locations', v.LocationsViewSet)
 
 urlpatterns = [
-    # path('', views.index),
+    path('', views.index),
     path('api-auth/', include('rest_framework.urls')),
     path('admin/', admin.site.urls),
     path('ads/', include("ads.urls")),
     path('users/', include("users.urls")),
-
-    path('token/', TokenObtainPairView.as_view()),
-    path('token/refresh/', TokenRefreshView.as_view()),
 
     path('fill_users/', views.fill_users_db),
     path('fill_categories/', views.fill_categories_db),
